@@ -210,3 +210,34 @@ WHERE O.TotalCost > 150.00 order by Cost ASC;
 
 
 -- Task 3
+
+USE LittleLemonDB;
+SELECT MenuName FROM Menu WHERE MenuID=ANY(SELECT MenuID FROM Orders WHERE Quantity >2);
+
+-- any shows any key is matched. in the nested query we list MenuId whose quantity is greater than 2
+-- outer query is searching  MenuName whose MenuID is matched ANY of the  element of the list and 
+-- if its matched with any element then print the MenuName  
+
+
+
+
+
+
+Creating a prepared statement
+
+=> PREPARE statement_Name 'INSERT INTO table1 VALUES (?, ?, ?, ?)';
+
+
+
+
+
+Task 1:
+In this first task, Little Lemon need you to create a procedure that displays the maximum ordered quantity in the Orders table. 
+
+Creating this procedure will allow Little Lemon to reuse the logic implemented in the procedure easily without retyping the same code over again and again to check the maximum quantity. 
+
+You can call the procedure GetMaxQuantity and invoke it as follows:
+
+
+
+

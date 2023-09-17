@@ -239,5 +239,67 @@ Creating this procedure will allow Little Lemon to reuse the logic implemented i
 You can call the procedure GetMaxQuantity and invoke it as follows:
 
 
+ANS:
 
+USE LittleLemonDB;
+DROP PROCEDURE IF EXISTS GetMaxQuantity;
+
+DELIMITER //
+CREATE PROCEDURE GetMaxQuantity()
+BEGIN
+SELECT MAX(Quantity) AS "Max Quantity in Order" FROM Orders;
+END //
+DELIMITER ;
+
+CALl GetMaxQuantity();
+
+
+TASK 2:
+In the second task, Little Lemon need you to help them to create a prepared statement called GetOrderDetail. This prepared statement will help to reduce the parsing time of queries. It will also help to secure the database from SQL injections.
+
+The prepared statement should accept one input argument, the CustomerID value, from a variable. 
+
+The statement should return the order id, the quantity and the order cost from the Orders table. 
+
+Once you create the prepared statement, you can create a variable called id and assign it value of 1. 
+
+Then execute the GetOrderDetail prepared statement using the following syntax:
+
+
+ANS: 
+
+
+USE LittleLemonDB;
+PREPARE GetOrderDetail
+FROM
+"SELECT OrderID,Quantity,TotalCost AS 'Cost' FROM Orders WHERE CustomerID = ?";
+
+SET @CustomerID = 1;
+EXECUTE GetOrderDetail USING @CustomerID;
+deallocate prepare GetOrderDetail;
+
+
+
+TASK 3:
+
+Your third and final task is to create a stored procedure called CancelOrder. Little Lemon want to use this stored procedure to delete an order record based on the user input of the order id.
+
+Creating this procedure will allow Little Lemon to cancel any order by specifying the order id value in the procedure parameter without typing the entire SQL delete statement.   
+
+If you invoke the CancelOrder procedure, the output result should be similar to the output of the following screenshot:
+
+
+ANS:
+
+DELIMITER //
+
+CREATE PROCEDURE CancelOrder(order_id INT)
+BEGIN
+	DELETE FROM Orders WHERE OrderID = order_id;
+	SELECT CONCAT("Order ", OrderID, " is cancelled") as Confirmation;
+END //
+
+DELIMITER ;
+
+CALL CancelOrder(50);
 

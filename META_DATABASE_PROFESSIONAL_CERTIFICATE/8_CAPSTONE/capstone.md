@@ -303,3 +303,64 @@ DELIMITER ;
 
 CALL CancelOrder(50);
 
+TASK-1:
+
+-- INSERT BOOKING
+
+USE LittleLemonDB;
+INSERT INTO Bookings(BookingDate,BookingTableNumber,CustomerID,StaffID)
+VALUES
+('2022-10-10',5,1,1),
+('2022-11-12',3,3,2),
+('2022-10-11',2,2,3),
+('2022-10-13',2,1,4);
+
+
+TASK-2
+-- CheckBooking
+
+
+DROP PROCEDURE IF EXISTS CheckBooking;
+DELIMITER //
+CREATE PROCEDURE CheckBooking(booking_date DATETIME,booking_table_number INT)
+BEGIN 
+	DECLARE booking_exists INT DEFAULT 0;
+    SELECT COUNT(*) INTO booking_exists FROM Bookings WHERE BookingDate = booking_date AND BookingTableNumber = booking_table_number;
+    IF booking_exists > 0 THEN
+		SELECT CONCAT("Table ",booking_table_number," already booked") AS "Booking status";
+    ELSE
+		SELECT "Table Is Open For booking" AS "Booking status";
+    END IF;
+END //
+DELIMITER ; 
+
+SELECT * FROM Bookings;
+CALL CheckBooking('2022-12-30',5);
+
+
+-- TASK 3
+
+USE LittleLemonDB;
+
+DROP PROCEDURE IF EXISTS AddValidBooking;
+DELIMITER //
+CREATE PROCEDURE AddValidBooking(booking_date DATE,booking_table_number INT,customer_id INT,staff_id INT)
+BEGIN
+	DECLARE booking_status INT DEFAULT 0;
+    START TRANSACTION;
+    SELECT COUNT(*) INTO booking_status FROM Bookings WHERE BookingDate = booking_date AND BookingTableNumber = booking_table_number;
+    IF booking_status > 0 THEN
+		-- booking already exists
+        SELECT CONCAT("Table ",booking_table_number," already booked - booking calcelled" ) AS "Booking status";
+        ROLLBACK;
+	ELSE
+		INSERT INTO Bookings(BookingDate,BookingTableNumber,CustomerID,StaffID)
+        VALUES
+        (booking_date,booking_table_number,customer_id,staff_id);
+        COMMIT;
+        SELECT "Booking Added" AS "Booking status";
+    END IF;
+END //
+DELIMITER ;
+CALL AddValidBooking("2022-10-10",7,1,2);
+

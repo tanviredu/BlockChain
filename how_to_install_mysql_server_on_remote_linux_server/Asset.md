@@ -1,0 +1,81 @@
+1) first ssh with this linux server "ssh tanvir@192.168.0.100"
+2) then update the package manager "sudo apt update"
+3) install the mysql server "sudo apt install mysql-server -y"
+4) start  service "sudo systemctl start mysql"
+5) enable service "sudo systemctl enable mysql"
+6) chck the status "sudo systemctl status mysql"
+7) enter the mysql with sudo previliges "sudo mysql"
+8) alter the user table for setting up root users password
+   we are going to change the authentication method to
+   mysql_native_password
+sql is: "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';"
+in the password sectio give your password
+
+9) then exit "mysql> exit";
+
+10) run "sudo mysql_secure_installation"
+    1) ask for the root password : <password>
+    2) ask for enable the password validator setup. you should do it 
+       for security. for now i can give no. it is recommended to give it
+    3) Chnge the password for root. for now i give no. do it if you want to do it
+    4) Remove anonymous users? YES. by default mysql installation has 
+       anonymous users.remove it
+    5) Disallow root login remotely: Yes. it is recomended . 
+    6) Remove test database and acesss to it: Yes;
+    7) Reload privileges tables. Yes
+    
+11) edit the configuraton file:
+    => sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
+    
+    commented the following line
+    bind-address = 127.0.0.1
+    to
+    #bind-address = 127.0.0.1
+
+12) restart the service
+    => sudo systemctl restart mysql
+
+13) enter the data base as a root user
+    => mysql -u root -p 
+
+14) Create users. which credentials will be used fro remote server
+    now:
+    VVVVVI:
+    suppose you want to create a user 
+    
+    username: tanvir
+    Ip address: of client[not server ,client] is : 192.168.0.3
+    password: 1122
+    Then create the user like that.
+    1) first create the user
+       >USE mysql;
+       ### CREATE USER 'user'@'ip_client' IDENTIFIED BY 'password'
+       >CREATE USER 'tanvir'@'192.168.0.3' IDENTIFIED BY '1122'
+    2) give permission to that newly created user
+       give permission to database you need. 
+       in this example i give all permission to this user
+       
+       > GRANT ALL ON *.* TO 'tanvir'@'192.168.0.3';
+    
+    3) Rreload the changes
+       > FLUSH PRIVILEGES;
+
+
+15) Mysql server use the port : 3306 port. allow port to the fire wall
+    => sudo ufw allow 3306/tcp;
+    => sudo ufw reload
+
+
+## thats the end of the server configuration
+## go to the client portion
+
+1) in linux : open terminal and use this command
+
+    => mysql -h [server_address] -u [username] -p <password>
+    => mysql -h 192.168.0.100 -u tanvir -p 1122
+
+2) or open up mysql-workbench and use this credentias to access the data; 
+ 
+
+
+

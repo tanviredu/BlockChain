@@ -38,3 +38,28 @@ print(my_list)
 data_removed = my_list.pop()
 print(data_removed)
 
+
+mylist = ["Tanvir","hasib","Ornob","Tonmoy"]
+print("Ornik" not in mylist)  ## true
+print("Tanvir" not in mylist) ## false
+
+
+## yuple packing and unpacking
+a = ["Tanvir","Rahman","CDA23"]
+
+fname,lname,address = a
+print(fname)
+print(lname)
+print(address)
+
+## remember item number and variable number should be same
+## otherwise it will through en error
+
+a = ["Tanvir","Rahman",["CDA23 Agrabad","Chittaging","Bangladesh"]]
+
+fname,lname,address = a
+print(address)
+fname,lname,[address,city,country] = a
+print(address)
+print(city)
+print(country)

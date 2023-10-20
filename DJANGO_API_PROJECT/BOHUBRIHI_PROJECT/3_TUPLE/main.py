@@ -17,3 +17,14 @@ print(tp2[3][1])
 tp3 = "Tanvir",
 print(tp3)
 print(type(tp3))
+
+
+
+mytuple = ("Tanvir","Hasnat","Tonmoy","hasib","Anita")
+print("Tanvir" in mytuple);
+print("Ahmed" in mytuple)
+mytuple2 = ("Ribondro","Ahuja","gandhi","openhimer")
+
+## it will add the two tuple
+mytuple3 = mytuple+mytuple2
+print(mytuple3)

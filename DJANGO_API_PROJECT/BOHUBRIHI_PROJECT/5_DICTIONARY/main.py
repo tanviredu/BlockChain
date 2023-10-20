@@ -21,10 +21,7 @@ a = dict(Name="Tanvir",address="Agrabad",city="Chittagong")
 print(a)
 b = dict(zip(['Name','address','city'],['Tanvir','Agrabad','Chittagong']))
 print(b)
-
-b.pop("Name") ## inside the pop instead of index 
-              ## you have t provide value
+b.pop("Name") ## inside the pop instead of index ## you have t provide value
 print(b)
-
 x = list(b) ## it will return the keys of the dict
 print(x)

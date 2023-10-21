@@ -21,9 +21,18 @@ def loop_method() -> List[int]:
         if item%2 == 0:
             evenlist.append(item)
     return evenlist
+print(loop_method())
+## comprehension method
 
+newlist = [x for x in range(1,21) if x % 2 == 0]
+print(newlist)
+
+## with filter method
 def isEven(number : int) -> bool:
     if number % 2 == 0:
         return True
     else:
         return False
+
+newlist = list(filter(isEven,list(range(1,21))))
+print(newlist)

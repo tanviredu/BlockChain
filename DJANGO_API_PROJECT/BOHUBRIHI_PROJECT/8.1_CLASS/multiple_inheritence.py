@@ -12,12 +12,16 @@ class B:
         print("JOB IS : {}".format(self.job))
 
 class C(A,B):
-    pass
+    def __init__(self,name,job):
+        ## you have to manually give them the
+        ## proper value
+        A.__init__(self,name)
+        B.__init__(self,job)
 
 ## question is how do you know which constructor data
 ## you will be fullfilling class A, or class B
 ## in this case class A because you called it first
 
-c = C("Tanvir")
+c = C("Tanvir","Student")
 c.show1()
 c.show2()

@@ -7,6 +7,8 @@ class A:
 
 
 class B(A):
+
+    ## this is a override function
     def show(self):
         print("HELLO FROM TEE CLASS B");
 

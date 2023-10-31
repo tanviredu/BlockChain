@@ -1,5 +1,7 @@
 1) first ssh with this linux server "ssh tanvir@192.168.0.100"
 2) then update the package manager "sudo apt update"
+or
+=> sudo yum update
 3) install the mysql server "sudo apt install mysql-server -y"
 4) start  service "sudo systemctl start mysql"
 5) enable service "sudo systemctl enable mysql"

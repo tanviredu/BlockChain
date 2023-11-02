@@ -2,7 +2,7 @@ from .models import Status
 from .serializers import StatusSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView,CreateAPIView
 
 
 class StatusAPIView(APIView):
@@ -13,5 +13,9 @@ class StatusAPIView(APIView):
 
 
 class StatusListAPIView(ListAPIView):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+class StatusCreateAPIView(CreateAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer

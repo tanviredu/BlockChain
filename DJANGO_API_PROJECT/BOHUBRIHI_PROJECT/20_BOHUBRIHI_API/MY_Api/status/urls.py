@@ -9,9 +9,14 @@ from .views import (
     StatusDeleteAPIView,
     StatusListPostView,
     StatusDetailPutPatchDelete,
+    GenericListPostView,
+    GenericRetUpdateDestroy,
 )
 
 urlpatterns = [
+    path("statusV3/", GenericListPostView.as_view()),
+    path("statusV3/<id>/", GenericRetUpdateDestroy.as_view()),
+    ##
     path("statusV2/", StatusListPostView.as_view()),
     path("statusV2/<id>", StatusDetailPutPatchDelete.as_view()),
     ##

@@ -9,9 +9,28 @@ from rest_framework.generics import (
     RetrieveAPIView,
     UpdateAPIView,
     DestroyAPIView,
+    ListCreateAPIView,
+    RetrieveUpdateDestroyAPIView,
 )
+## FULL COMPACT
 
 
+## LIST AND POST
+class GenericListPostView(ListCreateAPIView):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+
+
+class GenericRetUpdateDestroy(RetrieveUpdateDestroyAPIView):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    lookup_field = "id"
+
+
+##
+
+
+## THIS IS VERY RAW
 class StatusAPIView(APIView):
     def get(self, request, format=None):
         status_list = Status.objects.all()

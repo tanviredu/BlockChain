@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework import routers
 from .views import (
     StatusAPIView,
     StatusListAPIView,
@@ -11,7 +12,11 @@ from .views import (
     StatusDetailPutPatchDelete,
     GenericListPostView,
     GenericRetUpdateDestroy,
+    StatusViewSet,
 )
+
+router = routers.DefaultRouter()
+router.register(r"statusV4", StatusViewSet, basename="status")
 
 urlpatterns = [
     path("statusV3/", GenericListPostView.as_view()),
@@ -28,3 +33,5 @@ urlpatterns = [
     path("statusV1/update/<id>/", StatusUpdateAPIView.as_view()),
     path("statusV1/delete/<id>/", StatusDeleteAPIView.as_view()),
 ]
+
+urlpatterns += router.urls

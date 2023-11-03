@@ -2,7 +2,7 @@ from .models import Status
 from .serializers import StatusSerializer, StatusUpdateSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import mixins, parsers
+from rest_framework import mixins, parsers, viewsets
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
@@ -12,6 +12,15 @@ from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveUpdateDestroyAPIView,
 )
+
+
+## JUST ONE VIEW TO DO EVERY THING
+class StatusViewSet(viewsets.ModelViewSet):
+    queryset = Status.objects.all()
+    serializer_class = StatusSerializer
+    parser_classes = [parsers.FormParser, parsers.MultiPartParser]
+
+
 ## FULL COMPACT
 
 

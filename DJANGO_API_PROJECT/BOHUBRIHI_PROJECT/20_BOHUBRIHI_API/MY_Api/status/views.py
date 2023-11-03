@@ -2,7 +2,7 @@ from .models import Status
 from .serializers import StatusSerializer, StatusUpdateSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import mixins
+from rest_framework import mixins, parsers
 from rest_framework.generics import (
     ListAPIView,
     CreateAPIView,
@@ -19,12 +19,18 @@ from rest_framework.generics import (
 class GenericListPostView(ListCreateAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
+    ## we need parser to work with
+    ## fila handling
+    ## we need both parser
+    parser_classes = [parsers.FormParser, parsers.MultiPartParser]
 
 
 class GenericRetUpdateDestroy(RetrieveUpdateDestroyAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
     lookup_field = "id"
+    ## Update need parser too
+    parser_classes = [parsers.FormParser, parsers.MultiPartParser]
 
 
 ##

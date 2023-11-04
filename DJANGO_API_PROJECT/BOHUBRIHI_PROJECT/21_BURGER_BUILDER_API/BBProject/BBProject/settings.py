@@ -1,8 +1,9 @@
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_DIR = os.path.join(BASE_DIR,"media")
+MEDIA_DIR = os.path.join(BASE_DIR, "media")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -28,7 +29,7 @@ INSTALLED_APPS = [
     "API",
     "rest_framework",
     "corsheaders",
-    "django_cleanup"
+    "django_cleanup",
 ]
 
 MIDDLEWARE = [
@@ -44,6 +45,13 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 ROOT_URLCONF = "BBProject.urls"
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -116,3 +124,5 @@ MEDIA_URL = "/media/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTH_USER_MODEL = "API.UserProfile"

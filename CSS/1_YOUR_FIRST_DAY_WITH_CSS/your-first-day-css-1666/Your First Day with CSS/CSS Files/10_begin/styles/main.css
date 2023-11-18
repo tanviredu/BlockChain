@@ -1,0 +1,21 @@
+p {
+    color: rgb(249,255,235);
+}
+
+h1 {
+    color: rgb(120,176,50);
+}
+
+h3 {
+    color: rgb(249,255,235);
+}
+
+img {
+    width: 600px;
+    border: 1px solid rgb(105, 105, 105);
+}
+
+body {
+    background-color: rgb(34,34,34);
+    
+}
